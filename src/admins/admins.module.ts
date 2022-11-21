@@ -12,9 +12,13 @@ import { GroupsController } from './controllers/groups.controller';
 import { Permissions } from './entities/permissions.entity';
 import { PermissionsService } from './services/permissions.service';
 import { PermissionsController } from './controllers/permissions.controller';
+import { SessionModule } from 'src/session/session.module';
 //importar entidad, controlador y servicio de group y permissions
 @Module({
-  imports: [TypeOrmModule.forFeature([Admins, Admin_group, Permissions])],
+  imports: [
+    TypeOrmModule.forFeature([Admins, Admin_group, Permissions]),
+    SessionModule,
+  ],
   controllers: [AdminsController, PermissionsController, GroupsController],
   providers: [AdminsService, GroupsService, PermissionsService],
   exports: [AdminsService],

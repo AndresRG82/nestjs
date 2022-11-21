@@ -33,7 +33,7 @@ export class GroupsService {
     return this.groupsRepo.findBy({ group_name });
   }
 
-  async findById(id: number) {
+  async findById(id: string) {
     const group = await this.groupsRepo.findOneBy({ id });
     if (!group) {
       throw new NotFoundException(`Group #${id} is not found`);
@@ -41,7 +41,7 @@ export class GroupsService {
     return group;
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     const group = await this.groupsRepo.findOne({
       where: { id: id },
       relations: ['permissions'],
@@ -75,7 +75,7 @@ export class GroupsService {
     return group;
   }
 
-  async update(id: number, payload: UpdateGroupDto) {
+  async update(id: string, payload: UpdateGroupDto) {
     const group = await this.findById(id);
     if (!group) {
       throw new NotFoundException('Could not update data, group id not found.');
@@ -84,7 +84,7 @@ export class GroupsService {
     return this.groupsRepo.save(updated_group);
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     const group = await this.findOne(id);
     if (!group) {
       throw new NotFoundException(

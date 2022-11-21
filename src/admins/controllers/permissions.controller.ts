@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Delete,
-  ParseIntPipe,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 
 //import { ApiKeyGuard } from 'src/auth/guards/api-key.guard';
 import { PermissionsService } from '../services/permissions.service';
@@ -24,32 +16,31 @@ export class PermissionsController {
     return this.permissionsService.create(createPermissionDto);
   }
 
-  //@UseGuards(ApiKeyGuard)
   @Get()
   findAll() {
     return this.permissionsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id') id: string) {
     return this.permissionsService.findOne(id);
   }
 
-  @Get('permissions/:permission_name')
+  @Get('name/:permission_name')
   findByEmail(@Param('permission_name') permission_name: string) {
     return this.permissionsService.findByName(permission_name);
   }
 
   @Post(':id')
   update(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id') id: string,
     @Body() updatePermissionDto: UpdatePermissionDto,
   ) {
     return this.permissionsService.update(id, updatePermissionDto);
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number) {
+  remove(@Param('id') id: string) {
     return this.permissionsService.remove(id);
   }
 }

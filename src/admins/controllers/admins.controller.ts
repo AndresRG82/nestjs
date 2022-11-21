@@ -5,7 +5,6 @@ import {
   Body,
   Param,
   Delete,
-  ParseIntPipe,
   UseGuards,
 } from '@nestjs/common';
 
@@ -38,7 +37,7 @@ export class AdminsController {
 
   @Requires(Permissions.READ_USERS)
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id') id: string) {
     return this.adminsService.findOneWithRelations(id);
   }
 
@@ -50,16 +49,13 @@ export class AdminsController {
 
   @Requires(Permissions.MANAGE_USERS, Permissions.UPDATE_USERS)
   @Post(':id')
-  update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() updateAdminDto: UpdateAdminDto,
-  ) {
+  update(@Param('id') id: string, @Body() updateAdminDto: UpdateAdminDto) {
     return this.adminsService.update(id, updateAdminDto);
   }
 
   @Roles(Role.SUPERADMIN)
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number) {
+  remove(@Param('id') id: string) {
     return this.adminsService.remove(id);
   }
 }

@@ -6,13 +6,15 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './services/auth.service';
 import { AdminsModule } from 'src/admins/admins.module';
 import { LocalStrategy } from './strategies/local.strategy';
+import { JwtStrategy } from './strategies/jwt.strategy';
 import { AuthController } from './controllers/auth.controller';
 import config from 'src/config';
-import { JwtStrategy } from './strategies/jwt.strategy';
+import { SessionModule } from 'src/session/session.module';
 
 @Module({
   imports: [
     AdminsModule,
+    SessionModule,
     PassportModule,
     JwtModule.registerAsync({
       inject: [config.KEY],

@@ -1,13 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Delete,
-  Put,
-  ParseIntPipe,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 
 //import { ApiKeyGuard } from 'src/auth/guards/api-key.guard';
 import { GroupsService } from '../services/groups.service';
@@ -22,14 +13,13 @@ export class GroupsController {
     return this.groupsService.create(createGroupDto);
   }
 
-  //@UseGuards(ApiKeyGuard)
   @Get()
   findAll() {
     return this.groupsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id') id: string) {
     return this.groupsService.findOne(id);
   }
 
@@ -38,16 +28,13 @@ export class GroupsController {
     return this.groupsService.findByName(group_name);
   }
 
-  @Put(':id')
-  update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() updateGroupDto: UpdateGroupDto,
-  ) {
+  @Post(':id')
+  update(@Param('id') id: string, @Body() updateGroupDto: UpdateGroupDto) {
     return this.groupsService.update(id, updateGroupDto);
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number) {
+  remove(@Param('id') id: string) {
     return this.groupsService.remove(id);
   }
 }

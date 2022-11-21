@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -17,18 +17,27 @@ export class SessionService {
   }
 
   findAll() {
-    return `This action returns all session`;
+    return this.sessionRepo.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} session`;
+  findOne(id: string) {
+    return this.sessionRepo.findOne({ where: { id: id } });
   }
 
-  update(id: number, updateSessionDto: UpdateSessionDto) {
-    return `This action updates a #${id} session`;
+  async update(id: string, payload: UpdateSessionDto) {
+    const newSession = await this.findOne(id);
+    if (!newSession) {
+      throw new NotFoundException('Could not update data, session not found.');
+    }
+    const updated_session = this.sessionRepo.merge(newSession, payload);
+    return this.sessionRepo.save(updated_session);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} session`;
+  async remove(id: string) {
+    const session = await this.findOne(id);
+    if (!session) {
+      throw new NotFoundException(`Could not delete, session not found`);
+    }
+    return this.sessionRepo.delete(id);
   }
 }

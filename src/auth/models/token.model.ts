@@ -1,6 +1,5 @@
 export interface PayloadToken {
-  role: string;
   status: number;
-  id: number;
+  id: string;
   group: string;
 }

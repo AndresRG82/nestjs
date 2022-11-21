@@ -5,13 +5,11 @@ import * as Joi from 'joi';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DbModuleModule } from './db_module/database.module';
-import { CompaniesModule } from './companies/companies.module';
 import { SessionModule } from './session/session.module';
 import { UsersModule } from './users/users.module';
 import { enviroments } from './enviroments';
 import { AdminsModule } from './admins/admins.module';
 import { AuthModule } from './auth/auth.module';
-import { CaslModule } from './casl/casl.module';
 import configs from './config';
 
 @Module({
@@ -32,10 +30,8 @@ import configs from './config';
     DbModuleModule,
     UsersModule,
     SessionModule,
-    CompaniesModule,
     AdminsModule,
     AuthModule,
-    CaslModule,
   ],
   controllers: [AppController],
   providers: [AppService],

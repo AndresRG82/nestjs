@@ -11,7 +11,7 @@ export class CreateAdminDto {
   @IsOptional()
   @IsPositive()
   @ApiProperty()
-  readonly group_id: number;
+  readonly group_id: string;
 
   @IsNotEmpty()
   @IsString()
@@ -42,16 +42,6 @@ export class CreateAdminDto {
   @IsNumber()
   @ApiProperty()
   readonly status: number;
-
-  @IsNotEmpty()
-  @IsNumber()
-  @ApiProperty()
-  readonly super: number;
-
-  @IsNotEmpty()
-  @IsNumber()
-  @ApiProperty()
-  readonly role: string;
 
   @IsOptional()
   @IsString()

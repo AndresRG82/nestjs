@@ -42,7 +42,7 @@ export class PermissionsService {
     return this.permissionsRepo.findBy({ permission });
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     const permission = await this.permissionsRepo.find({
       where: {
         id: id,
@@ -65,7 +65,7 @@ export class PermissionsService {
     return exist;
   }
 
-  async update(id: number, payload: UpdatePermissionDto) {
+  async update(id: string, payload: UpdatePermissionDto) {
     const permission = await this.permissionsRepo.findOneBy({ id });
     if (!permission) {
       throw new NotFoundException(
@@ -80,7 +80,7 @@ export class PermissionsService {
     return this.permissionsRepo.save(updated_permission);
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     const permission = await this.findOne(id);
     if (!permission) {
       throw new NotFoundException(

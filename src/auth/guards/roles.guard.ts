@@ -7,6 +7,7 @@ import {
 import { Reflector } from '@nestjs/core';
 
 import { GroupsService } from 'src/admins/services/groups.service';
+import { SessionService } from 'src/session/session.service';
 import { PayloadToken } from '../models/token.model';
 import { Permissions } from '../models/permission.model';
 import { PERMISSION_KEY } from '../decorators/requires.decotator';
@@ -16,6 +17,7 @@ export class RolesGuard implements CanActivate {
   constructor(
     private reflector: Reflector,
     private groupsService: GroupsService,
+    private sessionService: SessionService,
   ) {}
   async getPermissions(groupname) {
     const permissions = await this.groupsService.findByNameWithRelations(
@@ -58,6 +60,7 @@ export class RolesGuard implements CanActivate {
         "you don't have enough permissions for this operation.",
       );
     }
+    const now = new Date();
     const sessionInfo = {
       user_id: admin.id,
       ip_adress: req.ip,
@@ -67,7 +70,9 @@ export class RolesGuard implements CanActivate {
         method: req.method,
         body: req.body,
       },
+      last_activity: now.toString(),
     };
+    this.sessionService.create(sessionInfo);
     console.log(sessionInfo);
     return true;
   }

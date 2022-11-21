@@ -9,7 +9,7 @@ export class CreatePermissionDto {
   @IsNotEmpty()
   @IsPositive()
   @ApiProperty()
-  readonly group_id: number;
+  readonly group_id: string;
 
   @IsOptional()
   @IsString()

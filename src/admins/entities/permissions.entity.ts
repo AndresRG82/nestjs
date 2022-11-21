@@ -12,8 +12,8 @@ import { Admin_group } from './admin_group.entity';
 
 @Entity()
 export class Permissions {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({ type: 'varchar', length: 255 })
   permission: string;

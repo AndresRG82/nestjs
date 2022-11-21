@@ -1,15 +1,10 @@
 import { PartialType, ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 export class CreateSessionDto {
-  @IsNotEmpty()
-  @IsString()
-  @ApiProperty()
-  readonly id: string;
-
   @IsOptional()
   @IsNumber()
   @ApiProperty()
-  readonly user_id: number;
+  readonly user_id: string;
 
   @IsOptional()
   @IsString()
@@ -24,12 +19,12 @@ export class CreateSessionDto {
   @IsNotEmpty()
   @IsString()
   @ApiProperty()
-  readonly payload: string;
+  readonly payload: any;
 
   @IsNotEmpty()
   @IsNumber()
   @ApiProperty()
-  readonly last_activity: number;
+  readonly last_activity: string;
 }
 
 export class UpdateSessionDto extends PartialType(CreateSessionDto) {}

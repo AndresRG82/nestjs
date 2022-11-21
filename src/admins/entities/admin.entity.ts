@@ -12,8 +12,8 @@ import { Admin_group } from './admin_group.entity';
 
 @Entity()
 export class Admins {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({ type: 'varchar', length: 255 })
   name: string;
@@ -34,14 +34,8 @@ export class Admins {
   @Column({ type: 'int4', default: 1 })
   status: number;
 
-  @Column({ type: 'int2', default: 0 })
-  super: number;
-
   @Column({ type: 'varchar', length: 100, nullable: true })
   remember_token: string;
-
-  @Column({ type: 'varchar', length: 255, nullable: true })
-  role: string;
 
   @ManyToOne(() => Admin_group, (group) => group.group_name)
   group: Admin_group;

@@ -16,6 +16,7 @@ export class SessionController {
 
   @Post()
   create(@Body() createSessionDto: CreateSessionDto) {
+    console.log(createSessionDto);
     return this.sessionService.create(createSessionDto);
   }
 
@@ -26,16 +27,16 @@ export class SessionController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.sessionService.findOne(+id);
+    return this.sessionService.findOne(id);
   }
 
-  @Put(':id')
+  @Post(':id')
   update(@Param('id') id: string, @Body() updateSessionDto: UpdateSessionDto) {
-    return this.sessionService.update(+id, updateSessionDto);
+    return this.sessionService.update(id, updateSessionDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.sessionService.remove(+id);
+    return this.sessionService.remove(id);
   }
 }

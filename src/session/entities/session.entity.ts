@@ -5,8 +5,8 @@ export class Sessions {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'int4', nullable: true })
-  user_id: number;
+  @Column({ type: 'varchar', nullable: true })
+  user_id: string;
 
   @Column({ type: 'varchar', length: 45, nullable: true })
   ip_adress: string;
@@ -14,9 +14,9 @@ export class Sessions {
   @Column({ type: 'text' })
   user_agent: string;
 
-  @Column({ type: 'text' })
-  payload: string;
+  @Column({ type: 'json', nullable: true })
+  payload: JSON;
 
-  @Column({ type: 'int4' })
-  last_activity: number;
+  @Column({ type: 'varchar' })
+  last_activity: string;
 }

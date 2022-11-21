@@ -41,7 +41,7 @@ export class AdminsService {
     return this.adminsRepo.findBy({ email });
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     const admin = await this.adminsRepo.findOneBy({ id });
     if (!admin) {
       throw new NotFoundException(`Admin #${id} not found`);
@@ -49,7 +49,7 @@ export class AdminsService {
     return admin;
   }
 
-  async findOneWithRelations(id: number) {
+  async findOneWithRelations(id: string) {
     const admin = await this.adminsRepo.find({
       where: { id: id },
       relations: ['group'],
@@ -80,7 +80,7 @@ export class AdminsService {
     return admin;
   }
 
-  async update(id: number, payload: UpdateAdminDto) {
+  async update(id: string, payload: UpdateAdminDto) {
     const admin = await this.findOne(id);
     if (!admin) {
       throw new NotFoundException(
@@ -95,7 +95,7 @@ export class AdminsService {
     return this.adminsRepo.save(updated_admin);
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     const admin = await this.findOne(id);
     if (!admin) {
       throw new NotFoundException(

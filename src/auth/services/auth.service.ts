@@ -24,7 +24,6 @@ export class AuthService {
 
   async generateToken(admin: Admins) {
     const payload: PayloadToken = {
-      role: admin.role,
       status: admin.status,
       id: admin.id,
       group: admin.group.group_name,
