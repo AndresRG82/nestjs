@@ -1,0 +1,6 @@
+PG_USER= "User"
+PG_PASSWORD= "Password"
+PG_HOST= "Host Adress"
+PG_DBNAME=  "DataBase Name"
+PG_PORT= "Expected Port"
+JWT_SECRET= "JWT secret passphrase"
