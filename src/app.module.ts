@@ -10,6 +10,7 @@ import { UsersModule } from './users/users.module';
 import { enviroments } from './enviroments';
 import { AdminsModule } from './admins/admins.module';
 import { AuthModule } from './auth/auth.module';
+import { CompanyModule } from './company/company.module';
 import configs from './config';
 
 @Module({
@@ -32,6 +33,7 @@ import configs from './config';
     SessionModule,
     AdminsModule,
     AuthModule,
+    CompanyModule,
   ],
   controllers: [AppController],
   providers: [AppService],

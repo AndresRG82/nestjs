@@ -7,14 +7,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
-import { Admins } from '../entities/admin.entity';
+import { Users } from '../entities/users.entity';
 import { CreateAdminDto, UpdateAdminDto } from '../dto/admin.dto';
 import { GroupsService } from './groups.service';
 
 @Injectable()
 export class AdminsService {
   constructor(
-    @InjectRepository(Admins) private adminsRepo: Repository<Admins>,
+    @InjectRepository(Users) private adminsRepo: Repository<Users>,
     private groupsService: GroupsService,
   ) {}
 
@@ -33,6 +33,7 @@ export class AdminsService {
     if (data.group_id) {
       const group = await this.groupsService.findOne(data.group_id);
       newAdmin.group = group;
+      newAdmin.rut = group.group_name;
     }
     return this.adminsRepo.save(newAdmin);
   }

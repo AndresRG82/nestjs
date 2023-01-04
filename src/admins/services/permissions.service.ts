@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Injectable,
   NotAcceptableException,
   NotFoundException,
@@ -73,10 +74,11 @@ export class PermissionsService {
       );
     }
     const updated_permission = this.permissionsRepo.merge(permission, payload);
-    if (payload.group_id) {
-      const group = await this.groupsService.findById(payload.group_id);
-      updated_permission.group = group;
+    if (!payload.group_id) {
+      throw new BadRequestException('Please, confirm the body fields');
     }
+    const group = await this.groupsService.findById(payload.group_id);
+    updated_permission.group = group;
     return this.permissionsRepo.save(updated_permission);
   }
 

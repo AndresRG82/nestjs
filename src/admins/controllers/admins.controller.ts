@@ -12,8 +12,6 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 //import { ApiKeyGuard } from 'src/auth/guards/api-key.guard';
 import { AdminsService } from '../services/admins.service';
 import { CreateAdminDto, UpdateAdminDto } from '../dto/admin.dto';
-import { Roles } from 'src/auth/decorators/role.decorator';
-import { Role } from 'src/auth/models/roles.model';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { Requires } from 'src/auth/decorators/requires.decotator';
 import { Permissions } from 'src/auth/models/permission.model';
@@ -41,7 +39,6 @@ export class AdminsController {
     return this.adminsService.findOneWithRelations(id);
   }
 
-  @Roles(Role.SUPERADMIN, Role.AMDIN)
   @Get('email/:email')
   findByEmail(@Param('email') email: string) {
     return this.adminsService.findByEmail(email);
@@ -53,7 +50,6 @@ export class AdminsController {
     return this.adminsService.update(id, updateAdminDto);
   }
 
-  @Roles(Role.SUPERADMIN)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.adminsService.remove(id);

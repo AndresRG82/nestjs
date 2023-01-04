@@ -2,13 +2,13 @@ import {
   PrimaryGeneratedColumn,
   Column,
   Entity,
-  ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToMany,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
 
-import { Admin_group } from './admin_group.entity';
+import { User_group } from './user_group.entity';
 
 @Entity()
 export class Permissions {
@@ -18,8 +18,8 @@ export class Permissions {
   @Column({ type: 'varchar', length: 255 })
   permission: string;
 
-  @ManyToOne(() => Admin_group, (group) => group.permissions)
-  group: Admin_group;
+  @ManyToMany(() => User_group, (group) => group.permissions)
+  group: User_group;
 
   @Exclude()
   @CreateDateColumn({ type: 'timestamptz' })

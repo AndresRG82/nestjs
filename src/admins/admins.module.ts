@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { Admins } from './entities/admin.entity';
+import { Users } from './entities/users.entity';
 import { AdminsService } from './services/admins.service';
 import { AdminsController } from './controllers/admins.controller';
 
-import { Admin_group } from './entities/admin_group.entity';
+import { User_group } from './entities/user_group.entity';
 import { GroupsService } from './services/groups.service';
 import { GroupsController } from './controllers/groups.controller';
 
@@ -16,11 +16,11 @@ import { SessionModule } from 'src/session/session.module';
 //importar entidad, controlador y servicio de group y permissions
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Admins, Admin_group, Permissions]),
+    TypeOrmModule.forFeature([Users, User_group, Permissions]),
     SessionModule,
   ],
   controllers: [AdminsController, PermissionsController, GroupsController],
   providers: [AdminsService, GroupsService, PermissionsService],
-  exports: [AdminsService],
+  exports: [AdminsService, GroupsService],
 })
 export class AdminsModule {}

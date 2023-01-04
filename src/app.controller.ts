@@ -7,6 +7,8 @@ export class AppController {
 
   @Get()
   getHello(): string {
+    console.log('a');
     return this.appService.getHello();
   }
+  //De aquí hacia abajo es para probar la app movil
 }

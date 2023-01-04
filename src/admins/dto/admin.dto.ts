@@ -51,6 +51,11 @@ export class CreateAdminDto {
   @IsOptional()
   @IsString()
   @ApiProperty()
+  readonly confirmation_token: string;
+
+  @IsOptional()
+  @IsString()
+  @ApiProperty()
   readonly created_at: string;
 
   @IsOptional()

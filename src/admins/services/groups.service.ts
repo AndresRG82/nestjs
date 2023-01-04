@@ -1,18 +1,22 @@
 import {
+  BadRequestException,
   Injectable,
   NotAcceptableException,
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 
-import { Admin_group } from '../entities/admin_group.entity';
+import { User_group } from '../entities/user_group.entity';
+import { Permissions } from '../entities/permissions.entity';
 import { CreateGroupDto, UpdateGroupDto } from '../dto/admin_group.dto';
 
 @Injectable()
 export class GroupsService {
   constructor(
-    @InjectRepository(Admin_group) private groupsRepo: Repository<Admin_group>,
+    @InjectRepository(User_group) private groupsRepo: Repository<User_group>,
+    @InjectRepository(Permissions)
+    private permissionsRepo: Repository<Permissions>,
   ) {}
 
   async findAll() {
@@ -24,7 +28,7 @@ export class GroupsService {
     const newGroup = this.groupsRepo.create(data);
     const exist = await this.searchByName(newGroup.group_name);
     if (exist.length != 0) {
-      throw new NotAcceptableException('The email is already in use');
+      throw new NotAcceptableException('The group already exists');
     }
     return this.groupsRepo.save(newGroup);
   }
@@ -53,7 +57,10 @@ export class GroupsService {
   }
 
   async findByName(group_name: string) {
-    const group = await this.groupsRepo.findOneBy({ group_name });
+    const group = await this.groupsRepo.findOne({
+      where: { group_name: group_name },
+      relations: ['permissions'],
+    });
     if (!group) {
       throw new NotFoundException(
         "the group name doesn't match with any registered group",
@@ -80,8 +87,23 @@ export class GroupsService {
     if (!group) {
       throw new NotFoundException('Could not update data, group id not found.');
     }
-    const updated_group = this.groupsRepo.merge(group, payload);
-    return this.groupsRepo.save(updated_group);
+    if (payload.permissions_id != null) {
+      const permissions = await this.permissionsRepo.findBy({
+        id: In(payload.permissions_id),
+      });
+      if (!permissions) {
+        throw new BadRequestException(
+          "The permissions ID's do not match any permission registered in the database.",
+        );
+      }
+      const updated_group = this.groupsRepo.merge(group, payload);
+      updated_group.permissions = permissions;
+      return this.groupsRepo.save(updated_group);
+    }
+    if (payload.group_name != null) {
+      const updated_group = this.groupsRepo.merge(group, payload);
+      return this.groupsRepo.save(updated_group);
+    }
   }
 
   async remove(id: string) {

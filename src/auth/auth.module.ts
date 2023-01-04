@@ -5,15 +5,21 @@ import { JwtModule } from '@nestjs/jwt';
 
 import { AuthService } from './services/auth.service';
 import { AdminsModule } from 'src/admins/admins.module';
+import { UsersModule } from 'src/users/users.module';
 import { LocalStrategy } from './strategies/local.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { AuthController } from './controllers/auth.controller';
 import config from 'src/config';
 import { SessionModule } from 'src/session/session.module';
+import { OauthController } from './controllers/oauth.controller';
+import { GoogleStrategy } from './strategies/google.strategy';
+import { CompanyModule } from 'src/company/company.module';
 
 @Module({
   imports: [
     AdminsModule,
+    UsersModule,
+    CompanyModule,
     SessionModule,
     PassportModule,
     JwtModule.registerAsync({
@@ -26,7 +32,7 @@ import { SessionModule } from 'src/session/session.module';
       },
     }),
   ],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
-  controllers: [AuthController],
+  providers: [AuthService, LocalStrategy, JwtStrategy, GoogleStrategy],
+  controllers: [AuthController, OauthController],
 })
 export class AuthModule {}

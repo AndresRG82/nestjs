@@ -4,4 +4,7 @@ export enum Permissions {
   READ_USERS = 'read_users',
   UPDATE_USERS = 'update_users',
   DELETE_USERS = 'delete_users',
+
+  READ_PROFILE = 'read_profile',
+  READ_ASSISTANCES = 'read_assistances',
 }

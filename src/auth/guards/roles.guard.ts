@@ -31,15 +31,17 @@ export class RolesGuard implements CanActivate {
       PERMISSION_KEY,
       context.getHandler(),
     );
+    //console.log(req_permissions);
     if (!req_permissions) {
       return true;
     }
     const req = context.switchToHttp().getRequest();
     const admin = req.user as PayloadToken;
     const rawData = await this.getPermissions(admin.group);
+    console.log(req);
     if (!rawData) {
       throw new UnauthorizedException(
-        "you don't have enough permissions for this operation.",
+        "You don't have enough permissions for this operation.",
       );
     }
     const permissions: Permissions[] = [];
@@ -73,7 +75,7 @@ export class RolesGuard implements CanActivate {
       last_activity: now.toString(),
     };
     this.sessionService.create(sessionInfo);
-    console.log(sessionInfo);
+    //console.log(sessionInfo);
     return true;
   }
 }

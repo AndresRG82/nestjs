@@ -5,8 +5,10 @@ import {
   Body,
   Param,
   Delete,
-  ParseIntPipe,
   Put,
+  BadRequestException,
+  Req,
+  Request,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
@@ -16,8 +18,13 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  create(@Body() userData: CreateUserDto) {
+    if (userData.password != null && userData.email != null) {
+      return this.usersService.create(userData);
+    }
+    throw new BadRequestException(
+      'Please confirm that the data entered are as requested.',
+    );
   }
 
   @Get()
@@ -25,21 +32,25 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  @Get('profile')
+  decodeToken(@Req() request) {
+    const authHeader = request.headers.authorization.split(' ');
+    const accessToken = authHeader[1];
+    return this.usersService.findByToken(accessToken);
+  }
+
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id') id: string) {
     return this.usersService.findOne(id);
   }
 
-  @Put(':id')
-  update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() updateUserDto: UpdateUserDto,
-  ) {
+  @Post(':id')
+  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+    return this.usersService.remove(id);
   }
 }

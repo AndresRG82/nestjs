@@ -25,7 +25,7 @@ export class GroupsController {
 
   @Get('name/:group_name')
   findByName(@Param('group_name') group_name: string) {
-    return this.groupsService.findByName(group_name);
+    return this.groupsService.findByNameWithRelations(group_name);
   }
 
   @Post(':id')
