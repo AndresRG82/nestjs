@@ -59,6 +59,14 @@ export class UsersService {
     return user;
   }
 
+  async findAvatarByToken(token: string) {
+    const user = (await this.findByToken(token)) as Users;
+    if (user != null) {
+      return user.avatar;
+    }
+    return new NotFoundException('User not found');
+  }
+
   async findByEmail(email: string) {
     const user = await this.userRepo.findOne({
       where: { email: email },

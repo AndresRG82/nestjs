@@ -12,8 +12,8 @@ import { User_group as Company_group } from 'src/admins/entities/user_group.enti
 
 @Entity()
 export class Companies {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Exclude()
   @Column({ type: 'varchar', length: 255, nullable: true })

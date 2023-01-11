@@ -34,9 +34,9 @@ export class AdminsController {
   }
 
   @Requires(Permissions.READ_USERS)
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.adminsService.findOneWithRelations(id);
+  @Get(':uid')
+  findOne(@Param('uid') uid: string) {
+    return this.adminsService.findOneWithRelations(uid);
   }
 
   @Get('email/:email')

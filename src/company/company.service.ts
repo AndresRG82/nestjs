@@ -42,27 +42,35 @@ export class CompanyService {
     return exist;
   }
 
-  async findOne(id: number) {
-    const admin = await this.companiesRepo.findOneBy({ id });
-    if (!admin) {
+  async findOne(id: string) {
+    const company = await this.companiesRepo.findOne({ where: { id: id } });
+    if (!company) {
       throw new NotFoundException(`company #${id} not found`);
     }
-    return admin;
+    return company;
+  }
+
+  async findUID(company_uid: number) {
+    const company = await this.companiesRepo.findOne({
+      where: { company_uid: company_uid },
+    });
+    return company;
   }
 
   async findWithRelations(client_id) {
-    const admin = await this.companiesRepo.findOne({
+    const company = await this.companiesRepo.findOne({
       where: { client_id: client_id },
       relations: ['group'],
     });
-    if (!admin) {
-      throw new NotFoundException(`Admin #${client_id} not found`);
+    if (!company) {
+      throw new NotFoundException(`Company #${client_id} not found`);
     }
-    return admin;
+    return company;
   }
 
-  async update(id: number, payload: UpdateCompanyDto) {
-    const company = await this.findOne(id);
+  async update(payload: UpdateCompanyDto) {
+    const target_company = payload.company_uid;
+    const company = await this.findUID(target_company);
     if (!company) {
       throw new NotFoundException(
         'Could not update data, company id not found.',
@@ -76,7 +84,14 @@ export class CompanyService {
     return this.companiesRepo.save(updated_admin);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} company`;
+  async remove(payload: UpdateCompanyDto) {
+    const target_company = await payload.company_uid;
+    if (!target_company) {
+      throw new NotFoundException(
+        `Could not delete company #${target_company}, company not found`,
+      );
+    }
+    this.companiesRepo.delete(target_company);
+    return `Company ${target_company} was deleted successfully`;
   }
 }

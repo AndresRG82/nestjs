@@ -5,7 +5,7 @@ import { AuthService } from '../services/auth.service';
 import { AdminsService } from 'src/admins/services/admins.service';
 import { CompanyService } from 'src/company/company.service';
 
-@Controller('auth')
+@Controller('oauth')
 export class AuthController {
   constructor(
     private authService: AuthService,
@@ -19,9 +19,9 @@ export class AuthController {
     return this.authService.generateToken(admin);
   }
 
-  @Post('api/login')
+  @Post('token')
   async channelLogin(@Body() user) {
-    const client = await this.companyService.findWithRelations(user.email);
+    const client = await this.companyService.findWithRelations(user.client_id);
     return this.authService.generateCompanyToken(client);
   }
 }

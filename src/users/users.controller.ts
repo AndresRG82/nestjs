@@ -8,16 +8,15 @@ import {
   Put,
   BadRequestException,
   Req,
-  Request,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
 
-@Controller('users')
+@Controller('v1')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
+  @Post('createProfile')
   create(@Body() userData: CreateUserDto) {
     if (userData.password != null && userData.email != null) {
       return this.usersService.create(userData);
@@ -27,7 +26,7 @@ export class UsersController {
     );
   }
 
-  @Get()
+  @Get('getProfiles')
   findAll() {
     return this.usersService.findAll();
   }
@@ -39,17 +38,22 @@ export class UsersController {
     return this.usersService.findByToken(accessToken);
   }
 
-  @Get(':id')
+  @Get('profile/avatar/:token')
+  getAvatar(@Param('token') token: string) {
+    return this.usersService.findByToken(token);
+  }
+
+  @Get('profile/:id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(id);
   }
 
-  @Post(':id')
+  @Put('profile/:id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);
   }
 
-  @Delete(':id')
+  @Delete('profile/:id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
   }

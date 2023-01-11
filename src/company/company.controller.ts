@@ -1,41 +1,33 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { CompanyService } from './company.service';
 import { CreateCompanyDto, UpdateCompanyDto } from './dto/create-company.dto';
 
-@Controller('company')
+@Controller('coveradmin')
 export class CompanyController {
   constructor(private readonly companyService: CompanyService) {}
 
-  @Post()
-  create(@Body() createCompanyDto: CreateCompanyDto) {
-    return this.companyService.create(createCompanyDto);
-  }
-
-  @Get()
+  @Get('companies')
   findAll() {
     return this.companyService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: number) {
+  @Get('companies/:id')
+  findOne(@Param('id') id: string) {
     return this.companyService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: number, @Body() updateCompanyDto: UpdateCompanyDto) {
-    return this.companyService.update(id, updateCompanyDto);
+  @Post('company')
+  create(@Body() createCompanyDto: CreateCompanyDto) {
+    return this.companyService.create(createCompanyDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: number) {
-    return this.companyService.remove(id);
+  @Post('company/createUpdate')
+  update(@Body() payload: UpdateCompanyDto) {
+    return this.companyService.update(payload);
+  }
+
+  @Post('company/delete')
+  remove(@Body() payload: UpdateCompanyDto) {
+    return this.companyService.remove(payload);
   }
 }
