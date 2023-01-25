@@ -9,6 +9,8 @@ import {
 import { Exclude } from 'class-transformer';
 
 import { User_group } from './user_group.entity';
+import { Code } from 'src/codes/entities/code.entity';
+import { Code_group } from 'src/codes/entities/code_group.entity';
 
 @Entity()
 export class Users {
@@ -60,6 +62,12 @@ export class Users {
 
   @ManyToOne(() => User_group, (group) => group.group_name)
   group: User_group;
+
+  @ManyToOne(() => Code, (code) => code.user)
+  codes: Code[];
+
+  @ManyToOne(() => Code_group, (code) => code.user_id)
+  code_groups: Code_group[];
 
   @Exclude()
   @CreateDateColumn({ type: 'timestamptz', nullable: true })

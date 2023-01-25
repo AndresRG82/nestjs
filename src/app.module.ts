@@ -11,6 +11,7 @@ import { enviroments } from './enviroments';
 import { AdminsModule } from './admins/admins.module';
 import { AuthModule } from './auth/auth.module';
 import { CompanyModule } from './company/company.module';
+import { CodesModule } from './codes/codes.module';
 import configs from './config';
 
 @Module({
@@ -34,6 +35,7 @@ import configs from './config';
     AdminsModule,
     AuthModule,
     CompanyModule,
+    CodesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -37,6 +37,7 @@
     "class-validator": "^0.13.2",
     "googleapis": "^109.0.1",
     "joi": "^17.6.3",
+    "node-deeplink": "^0.6.0",
     "passport": "^0.6.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-jwt": "^4.0.0",

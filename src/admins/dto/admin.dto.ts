@@ -4,12 +4,10 @@ import {
   IsNotEmpty,
   IsNumber,
   IsOptional,
-  IsPositive,
   IsString,
 } from 'class-validator';
 export class CreateAdminDto {
   @IsOptional()
-  @IsPositive()
   @ApiProperty()
   readonly group_id: string;
 

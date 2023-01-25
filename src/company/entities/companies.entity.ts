@@ -5,10 +5,12 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  OneToMany,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
 
 import { User_group as Company_group } from 'src/admins/entities/user_group.entity';
+import { Code } from 'src/codes/entities/code.entity';
 
 @Entity()
 export class Companies {
@@ -73,4 +75,7 @@ export class Companies {
 
   @ManyToOne(() => Company_group, (group) => group.group_name)
   group: Company_group;
+
+  @OneToMany(() => Code, (code) => code.company)
+  codes: Code[];
 }
