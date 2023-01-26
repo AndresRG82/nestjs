@@ -7,7 +7,7 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { Deeplink } from 'node-deeplink';
+import * as Deeplink from 'node-deeplink';
 
 import { CodesService } from '../services/codes.service';
 import { CreateCodeDto, UpdateCodeDto } from '../dto/codes.dto';
@@ -16,10 +16,7 @@ import { DeeplinkPayload } from '../Models/deeplink_payload.model';
 
 @Controller('discounts')
 export class CodesController {
-  constructor(
-    private readonly codesService: CodesService,
-    private deeplink: Deeplink,
-  ) {}
+  constructor(private readonly codesService: CodesService) {}
 
   @Post('add')
   create(@Body() payload: CreateCodeGroupDto) {
@@ -27,13 +24,15 @@ export class CodesController {
   }
 
   @Post('link')
-  generateDeeplink(@Body() payload: DeeplinkPayload): string {
-    return this.deeplink.create({
+  async generateDeeplink() {
+    const options = {
       url: 'myapp://path',
+      fallback: 'myapp://path',
       path: '/path',
       appName: 'My App',
       packageName: 'com.myapp',
-    });
+    };
+    return Deeplink({ fallback: 'https://google.cl' });
   }
 
   @Post()
