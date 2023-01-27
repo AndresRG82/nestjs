@@ -33,7 +33,6 @@ export class AdminsService {
     if (data.group_id) {
       const group = await this.groupsService.findOne(data.group_id);
       newAdmin.group = group;
-      newAdmin.rut = group.group_name;
     }
     return this.adminsRepo.save(newAdmin);
   }
@@ -60,6 +59,7 @@ export class AdminsService {
     }
     return admin;
   }
+
   async findByEmailWithRelations(email) {
     const admin = await this.adminsRepo.findOne({
       where: { email: email },

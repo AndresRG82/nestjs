@@ -1,4 +1,8 @@
-import { Injectable, NotAcceptableException } from '@nestjs/common';
+import {
+  Injectable,
+  NotAcceptableException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateCodeDto, UpdateCodeDto } from '../dto/codes.dto';
@@ -63,19 +67,42 @@ export class CodesService {
       relations: ['codes'],
     });
   }
+  findGroupByID(id) {
+    return this.codesGRepo.findOne({
+      where: { id: id },
+      relations: ['codes'],
+    });
+  }
+
+  async burnCode(id) {
+    const code = await this.findOne(id);
+    const update = { status: 0 };
+    const updated_code = this.codesRepo.merge(code, update);
+    return this.codesRepo.save(updated_code);
+  }
+
   findAll() {
     return `This action returns all codes`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} code`;
+  async findOne(id: string) {
+    const code: Code = await this.codesRepo.findOne({ where: { id: id } });
+    if (!code) {
+      throw new NotFoundException(`Code #${id} doesn't exists`);
+    }
+    return code;
   }
 
   update(id: number, payload: UpdateCodeDto) {
     return `This action updates a #${id} code`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} code`;
+  async remove(id: string) {
+    const code = await this.findOne(id);
+    if (!code) {
+      throw new NotFoundException(`Code #${id} not found`);
+    }
+    const deleted_code = this.codesRepo.delete(code);
+    return deleted_code;
   }
 }

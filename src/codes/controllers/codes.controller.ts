@@ -22,15 +22,19 @@ export class CodesController {
   create(@Body() payload: CreateCodeGroupDto) {
     return this.codesService.create(payload);
   }
+  @Post('create')
+  createCode(@Body() payload: CreateCodeGroupDto) {
+    return this.create(payload);
+  }
 
   @Post('link')
   async generateDeeplink() {
     const options = {
       url: 'myapp://path',
-      fallback: 'myapp://path',
+      fallback: 'coverme://path',
       path: '/path',
-      appName: 'My App',
-      packageName: 'com.myapp',
+      appName: 'Coverme',
+      packageName: 'com.trust.coverme_diagnostic',
     };
     return Deeplink({ fallback: 'https://google.cl' });
   }
@@ -40,6 +44,11 @@ export class CodesController {
     return this.codesService.findGroupWithRelations(payload.name);
   }
 
+  @Post('code/burned')
+  burnCode(@Body() payload) {
+    return this.codesService.burnCode(payload);
+  }
+
   @Get()
   findAll() {
     return this.codesService.findAll();
@@ -47,16 +56,16 @@ export class CodesController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.codesService.findOne(+id);
+    return this.codesService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCodeDto: UpdateCodeDto) {
-    return this.codesService.update(+id, updateCodeDto);
+  @Get('code/get/:id')
+  findCodes(@Param('id') id: string) {
+    return this.codesService.findGroupByID(id);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.codesService.remove(+id);
+    return this.codesService.remove(id);
   }
 }

@@ -23,8 +23,8 @@ export class AdminsController {
   constructor(private readonly adminsService: AdminsService) {}
 
   @Post()
-  create(@Body() createAdminDto: CreateAdminDto) {
-    return this.adminsService.create(createAdminDto);
+  create(@Body() payload: CreateAdminDto) {
+    return this.adminsService.create(payload);
   }
 
   @Public()

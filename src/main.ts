@@ -10,7 +10,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Coverme API')
     .setDescription('Coverme API documentation')
-    .setVersion('0.2')
+    .setVersion('0.3')
     .build();
   const document = SwaggerModule.createDocument(app, config);
 

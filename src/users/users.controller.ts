@@ -16,7 +16,7 @@ import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post('createProfile')
+  @Post('register')
   create(@Body() userData: CreateUserDto) {
     if (userData.password != null && userData.email != null) {
       return this.usersService.create(userData);

@@ -1,6 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import {
-  IsIBAN,
   IsIn,
   IsNotEmpty,
   IsNumber,
