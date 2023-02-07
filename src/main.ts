@@ -18,6 +18,6 @@ async function bootstrap() {
   SwaggerModule.setup('docs', app, document);
 
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
-  await app.listen(8000);
+  await app.listen(8002);
 }
 bootstrap();

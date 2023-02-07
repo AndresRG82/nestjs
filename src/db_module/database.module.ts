@@ -13,10 +13,10 @@ import config from '../config';
         const { user, password, host, db_name, port } = ConfigService.database;
         return {
           type: 'postgres',
-          host,
-          port,
+          host: host,
+          port: port,
           username: user,
-          password,
+          password: password,
           database: db_name,
           autoLoadEntities: true,
           synchronize: true,

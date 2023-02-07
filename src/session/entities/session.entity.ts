@@ -17,6 +17,6 @@ export class Sessions {
   @Column({ type: 'json', nullable: true })
   payload: JSON;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: true })
   last_activity: string;
 }

@@ -5,7 +5,7 @@ import { ConfigType } from '@nestjs/config';
 
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
-import { Users } from '../admins/entities/users.entity';
+import { Users } from './entities/user.entity';
 import { AdminsModule } from 'src/admins/admins.module';
 import config from 'src/config';
 

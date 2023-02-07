@@ -43,20 +43,14 @@ export class CompanyService {
   }
 
   async findOne(id: string) {
-    const company = await this.companiesRepo.findOne({ where: { id: id } });
+    const company = await this.companiesRepo.findOne({
+      where: { client_id: id },
+    });
     if (!company) {
       throw new NotFoundException(`company #${id} not found`);
     }
     return company;
   }
-
-  async findUID(company_uid: number) {
-    const company = await this.companiesRepo.findOne({
-      where: { company_uid: company_uid },
-    });
-    return company;
-  }
-
   async findWithRelations(client_id) {
     const company = await this.companiesRepo.findOne({
       where: { client_id: client_id },
@@ -69,8 +63,8 @@ export class CompanyService {
   }
 
   async update(payload: UpdateCompanyDto) {
-    const target_company = payload.company_uid;
-    const company = await this.findUID(target_company);
+    const target_company = payload.client_id;
+    const company = await this.findOne(target_company);
     if (!company) {
       throw new NotFoundException(
         'Could not update data, company id not found.',
