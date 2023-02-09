@@ -1,10 +1,4 @@
-import {
-  Column,
-  Entity,
-  Index,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { DeviceTest } from 'src/devicetest/entities/devicetest.entity';
 import { Parameters } from 'src/parameters/entities/parameter.entity';
@@ -12,7 +6,6 @@ import { PhoneTests } from 'src/phonetests/entities/phonetest.entity';
 import { PlatformTest } from 'src/platformtest/entities/platformtest.entity';
 import { ProductTests } from 'src/producttests/entities/producttest.entity';
 
-@Index('tests_pkey', ['id'], { unique: true })
 @Entity('tests', { schema: 'public' })
 export class Tests {
   @PrimaryGeneratedColumn({ type: 'integer', name: 'id' })

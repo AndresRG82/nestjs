@@ -1,7 +1,6 @@
 import {
   Column,
   Entity,
-  Index,
   JoinColumn,
   ManyToOne,
   OneToMany,
@@ -14,7 +13,6 @@ import { Tests } from 'src/tests/entities/test.entity';
 import { DiagnosticGroups } from 'src/diagnosticgroups/entities/diagnosticgroup.entity';
 import { ProductDeviceScreenTests } from 'src/productdevicescreentests/entities/productdevicescreentest.entity';
 
-@Index('device_test_pkey', ['id'], { unique: true })
 @Entity('device_test', { schema: 'public' })
 export class DeviceTest {
   @PrimaryGeneratedColumn({ type: 'integer', name: 'id' })

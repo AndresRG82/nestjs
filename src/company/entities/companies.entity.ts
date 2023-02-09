@@ -2,7 +2,6 @@ import { Configs } from 'src/config/entities/config.entity';
 import {
   Column,
   Entity,
-  Index,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -15,7 +14,6 @@ import { Code } from 'src/codes/entities/code.entity';
 import { User_group as Company_group } from 'src/admins/entities/user_group.entity';
 import { Exclude } from 'class-transformer';
 
-@Index('companies_pkey', ['id'], { unique: true })
 @Entity('companies', { schema: 'public' })
 export class Companies {
   @PrimaryGeneratedColumn('uuid')

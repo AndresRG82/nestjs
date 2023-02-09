@@ -1,6 +1,5 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Index('files_pkey', ['id'], { unique: true })
 @Entity('files', { schema: 'public' })
 export class Files {
   @PrimaryGeneratedColumn({ type: 'bigint', name: 'id' })

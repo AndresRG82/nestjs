@@ -1,6 +1,5 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Index('currencies_pkey', ['id'], { unique: true })
 @Entity('currencies', { schema: 'public' })
 export class Currencies {
   @PrimaryGeneratedColumn({ type: 'bigint', name: 'id' })
@@ -18,8 +17,13 @@ export class Currencies {
   @Column('integer', { name: 'decimal_digits' })
   public decimalDigits: number;
 
-  @Column('double precision', { name: 'rounding', precision: 53 })
-  public rounding: number;
+  @Column('decimal', {
+    name: 'rounding',
+    precision: 5,
+    scale: 3,
+    nullable: true,
+  })
+  public rounding: number | null;
 
   @Column('character varying', { name: 'code', length: 255 })
   public code: string;

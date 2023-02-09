@@ -1,15 +1,7 @@
-import {
-  Column,
-  Entity,
-  Index,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { DeviceTest } from 'src/devicetest/entities/devicetest.entity';
 import { ProductsDevice } from 'src/productsdevice/entities/productsdevice.entity';
 
-@Index('diagnostic_groups_group_uuid_unique', ['groupUuid'], { unique: true })
-@Index('diagnostic_groups_pkey', ['id'], { unique: true })
 @Entity('diagnostic_groups', { schema: 'public' })
 export class DiagnosticGroups {
   @PrimaryGeneratedColumn({ type: 'bigint', name: 'id' })

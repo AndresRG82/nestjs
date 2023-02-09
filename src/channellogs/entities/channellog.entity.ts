@@ -1,6 +1,5 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Index('channel_logs_pkey', ['id'], { unique: true })
 @Entity('channel_logs', { schema: 'public' })
 export class ChannelLogs {
   @PrimaryGeneratedColumn({ type: 'bigint', name: 'id' })

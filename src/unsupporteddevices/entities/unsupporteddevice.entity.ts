@@ -1,6 +1,5 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Index('unsupported_devices_pkey', ['id'], { unique: true })
 @Entity('unsupported_devices', { schema: 'public' })
 export class UnsupportedDevices {
   @PrimaryGeneratedColumn({ type: 'integer', name: 'id' })

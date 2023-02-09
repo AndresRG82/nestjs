@@ -1,7 +1,5 @@
-import { Column, Entity, Index } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 
-@Index('cache_pk', ['key'], { unique: true })
-@Index('cache_key_unique', ['key'], { unique: true })
 @Entity('cache', { schema: 'public' })
 export class Cache {
   @Column('character varying', { primary: true, name: 'key', length: 255 })

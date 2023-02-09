@@ -1,7 +1,6 @@
 import {
   Column,
   Entity,
-  Index,
   JoinColumn,
   ManyToOne,
   OneToMany,
@@ -10,7 +9,6 @@ import {
 import { Companies } from 'src/company/entities/companies.entity';
 import { Transactions } from 'src/transactions/entities/transaction.entity';
 
-@Index('configs_pkey', ['id'], { unique: true })
 @Entity('configs', { schema: 'public' })
 export class Configs {
   @PrimaryGeneratedColumn({ type: 'bigint', name: 'id' })

@@ -1,7 +1,6 @@
 import {
   Column,
   Entity,
-  Index,
   JoinColumn,
   ManyToOne,
   OneToMany,
@@ -12,7 +11,6 @@ import { DiscountCodes } from 'src/discountcodes/entities/discountcode.entity';
 import { Products } from 'src/products/entities/product.entity';
 import { Users } from 'src/users/entities/user.entity';
 
-@Index('discounts_pkey', ['id'], { unique: true })
 @Entity('discounts', { schema: 'public' })
 export class Discounts {
   @PrimaryGeneratedColumn({ type: 'integer', name: 'id' })

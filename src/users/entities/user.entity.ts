@@ -1,19 +1,12 @@
-import {
-  Column,
-  Entity,
-  Index,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Devices } from 'src/devices/entities/device.entity';
 import { DiscountCodes } from 'src/discountcodes/entities/discountcode.entity';
 import { Discounts } from 'src/discounts/entities/discount.entity';
 
-@Index('users_pkey', ['id'], { unique: true })
 @Entity('users', { schema: 'public' })
 export class Users {
-  @PrimaryGeneratedColumn({ type: 'integer', name: 'id' })
-  public id: number;
+  @PrimaryGeneratedColumn('uuid')
+  public id: string;
 
   @Column('character varying', { name: 'name', length: 255 })
   public name: string;

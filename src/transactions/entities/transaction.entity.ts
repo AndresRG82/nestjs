@@ -1,14 +1,12 @@
 import {
   Column,
   Entity,
-  Index,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Configs } from 'src/config/entities/config.entity';
 
-@Index('transactions_pkey', ['id'], { unique: true })
 @Entity('transactions', { schema: 'public' })
 export class Transactions {
   @PrimaryGeneratedColumn({ type: 'bigint', name: 'id' })

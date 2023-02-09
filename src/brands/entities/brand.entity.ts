@@ -1,13 +1,6 @@
-import {
-  Column,
-  Entity,
-  Index,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Phones } from 'src/phones/entities/phone.entity';
 
-@Index('brands_pkey', ['id'], { unique: true })
 @Entity('brands', { schema: 'public' })
 export class Brands {
   @PrimaryGeneratedColumn({ type: 'integer', name: 'id' })

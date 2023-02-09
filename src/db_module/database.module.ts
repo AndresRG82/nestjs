@@ -20,6 +20,7 @@ import config from '../config';
           database: db_name,
           autoLoadEntities: true,
           synchronize: true,
+          logging: true,
         };
       },
     }),

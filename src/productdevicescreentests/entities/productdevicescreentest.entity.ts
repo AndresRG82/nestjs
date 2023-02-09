@@ -1,9 +1,7 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { DeviceTest } from 'src/devicetest/entities/devicetest.entity';
 import { ProductsDevice } from 'src/productsdevice/entities/productsdevice.entity';
 
-@Index('product_device_screen_tests_pk', ['id'], { unique: true })
-@Index('assistance_device_screen_tests_id_unique', ['id'], { unique: true })
 @Entity('product_device_screen_tests', { schema: 'public' })
 export class ProductDeviceScreenTests {
   @Column('uuid', { primary: true, name: 'id' })
