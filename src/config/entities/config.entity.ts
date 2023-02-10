@@ -87,7 +87,7 @@ export class Configs {
     name: 'custom_msj',
     default: [
       'Tienes una asistencia disponible para comprar',
-      '\u00bfDeseas adquirir la asistencia?',
+      'Deseas adquirir la asistencia?',
     ],
   })
   customMsj: object;
