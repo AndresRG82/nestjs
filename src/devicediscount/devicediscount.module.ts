@@ -10,4 +10,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   controllers: [DevicediscountController],
   providers: [DevicediscountService],
 })
-export class DevicediscountModule {}
+export class DevicediscountModule {
+  /* status */
+  INACTIVE = 0;
+  ACTIVE = 1;
+}

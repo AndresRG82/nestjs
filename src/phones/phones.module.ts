@@ -10,4 +10,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   controllers: [PhonesController],
   providers: [PhonesService],
 })
-export class PhonesModule {}
+export class PhonesModule {
+  /* status */
+  INACTIVE = 0;
+  ACTIVE = 1;
+
+  /* parameters */
+  PAGINATION = 100;
+}

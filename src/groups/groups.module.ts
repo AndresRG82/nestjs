@@ -10,4 +10,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   controllers: [GroupsController],
   providers: [GroupsService],
 })
-export class GroupsModule {}
+export class GroupsModule {
+  /* status */
+  INACTIVE = 0;
+  ACTIVE = 1;
+}

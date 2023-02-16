@@ -10,4 +10,17 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   controllers: [ParametersController],
   providers: [ParametersService],
 })
-export class ParametersModule {}
+export class ParametersModule {
+  /* status */
+  INACTIVE = 0;
+  ACTIVE = 1;
+
+  /* Parameters */
+  TOUCH_COLUMNS = 1;
+  TOUCH_ROWS = 2;
+  TOUCH_TIME = 3;
+  TOUCH_PERCENTAGE = 4;
+  CAMERA_TIME = 5;
+  SCREEN_TIME = 6;
+  SCREEN_PERCENTAGE = 7;
+}

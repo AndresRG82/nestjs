@@ -27,4 +27,11 @@ import config from 'src/config';
   providers: [UsersService],
   exports: [UsersService],
 })
-export class UsersModule {}
+export class UsersModule {
+  /* status */
+  INACTIVE = 0;
+  ACTIVE = 1;
+  AWAITING_CONFIRMATION = 2;
+
+  PASSPORT_CLIENT = 1;
+}

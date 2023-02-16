@@ -10,4 +10,8 @@ import { Brands } from './entities/brand.entity';
   providers: [BrandsService],
   exports: [BrandsService],
 })
-export class BrandsModule {}
+export class BrandsModule {
+  /* status */
+  INACTIVE = 0;
+  ACTIVE = 1;
+}

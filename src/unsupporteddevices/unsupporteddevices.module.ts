@@ -10,4 +10,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   controllers: [UnsupporteddevicesController],
   providers: [UnsupporteddevicesService],
 })
-export class UnsupporteddevicesModule {}
+export class UnsupporteddevicesModule {
+  INACTIVE = 0;
+  ACTIVE = 1;
+}

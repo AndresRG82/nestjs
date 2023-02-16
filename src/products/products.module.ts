@@ -9,4 +9,18 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   controllers: [ProductsController],
   providers: [ProductsService],
 })
-export class ProductsModule {}
+export class ProductsModule {
+  /* status */
+  INACTIVE = 0;
+  ACTIVE = 1;
+
+  /* paid */
+  NEGATIVE_PAID = 'NO';
+  AFFIRMATIVE_PAID = 'SI';
+
+  /* actions */
+  TOUCH = 1;
+  BUTTONS = 2;
+  CAMERA = 3;
+  SCREEN = 4;
+}

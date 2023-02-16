@@ -10,4 +10,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   controllers: [PlatformsController],
   providers: [PlatformsService],
 })
-export class PlatformsModule {}
+export class PlatformsModule {
+  /* status */
+  INACTIVE = 0;
+  ACTIVE = 1;
+}

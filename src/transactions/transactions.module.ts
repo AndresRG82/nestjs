@@ -10,4 +10,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   controllers: [TransactionsController],
   providers: [TransactionsService],
 })
-export class TransactionsModule {}
+export class TransactionsModule {
+  /* status */
+  CREATED = 1;
+  PAID = 2;
+  FAILED = 3;
+  CANCELED = 4;
+}

@@ -10,4 +10,20 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   controllers: [ProductsdeviceController],
   providers: [ProductsdeviceService],
 })
-export class ProductsdeviceModule {}
+export class ProductsdeviceModule {
+  /* status */
+  INACTIVE = 0;
+  ACTIVE = 1;
+
+  /* assistances states */
+  ACTIVATED = 1;
+  DISASTER = 2;
+  REJECTED = 3;
+  EXPIRED = 4;
+  PAID = 5;
+  NOT_BOUGHT = 6;
+  BUYING = 7;
+  PAYING = 8;
+  CANCELED = 9;
+  PREPAID = 10;
+}

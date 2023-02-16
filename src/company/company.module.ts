@@ -11,4 +11,8 @@ import { AdminsModule } from 'src/admins/admins.module';
   providers: [CompanyService],
   exports: [CompanyService],
 })
-export class CompanyModule {}
+export class CompanyModule {
+  /* status */
+  INACTIVE = 0;
+  ACTIVE = 1;
+}

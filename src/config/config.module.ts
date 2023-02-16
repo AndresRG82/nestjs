@@ -10,4 +10,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   controllers: [ConfigController],
   providers: [ConfigService],
 })
-export class ConfigCompanyModule {}
+export class ConfigCompanyModule {
+  /* status */
+  INACTIVE = 0;
+  ACTIVE = 1;
+}
