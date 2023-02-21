@@ -3,12 +3,14 @@ import { TestsService } from './tests.service';
 import { TestsController } from './tests.controller';
 import { Tests } from './entities/test.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { S3Service } from 'src/files/S3.service';
+import { OcrService } from './ocr.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Tests])],
   exports: [TestsService],
   controllers: [TestsController],
-  providers: [TestsService],
+  providers: [TestsService, S3Service, OcrService],
 })
 export class TestsModule {
   INACTIVE = 0;
